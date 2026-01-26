@@ -1,80 +1,74 @@
-[![Status](https://github.com/basic-bgnr/NepseUnofficialApi/actions/workflows/actions.yml/badge.svg)](https://github.com/basic-bgnr/NepseUnofficialApi/actions/workflows/actions.yml)  
-# NepseUnofficialApi
-Unofficial library to interface with nepalstock.com
-Deciphers the authentication key to access the api.
+# NEPSE API Test
 
-# How to Install?
-### A. Using Git + pip
-1. Make sure your python version >= 3.11
-1. Download this git repo into your local computer. 
-1. Change the directory to NepseUnofficialApi 
-1. Install the package
+Testing and exploring the NEPSE (Nepal Stock Exchange) unofficial API.
+
+## About
+
+This repository contains test implementations and experiments with the Nepal Stock Exchange unofficial API. The API allows accessing real-time market data, company information, and trading statistics.
+
+## Installation
+
+```bash
+pip install -r requirements.txt
 ```
-git clone https://github.com/basic-bgnr/NepseUnofficialApi.git 
-cd NepseUnofficialApi
-pip3 install .
-```
-### B. Using pip only(install directly from git)
-```
-pip install git+https://github.com/basic-bgnr/NepseUnofficialApi
-```
-# How to use?
-### A. API usage
-Blocking Nepse API Usage
-```
+
+## Features
+
+- Access to NEPSE market data
+- Company information retrieval
+- Real-time price and volume data
+- Floorsheet data access
+- Market indices and sub-indices
+- Interactive Jupyter notebook for testing
+
+## Quick Start
+
+```python
 from nepse import Nepse
+
+# Initialize the API
 nepse = Nepse()
-nepse.setTLSVerification(False) #This is temporary, until nepse sorts its ssl certificate problem
-nepse.getCompanyList()
-```
-Non-Blocking Nepse API Usage (use ipython or similar shell that allows await to be called on root)
-```
-from nepse import AsyncNepse 
-nepse = AsyncNepse()
-nepse.setTLSVerification(False) #This is temporary, until nepse sorts its ssl certificate problem
-await nepse.getCompanyList()
-```
-### B. Cli tool
-After installing the package, `nepse-cli` cmdline tool is available
-```
-dev└─ $ nepse-cli --help
-usage: nepse-cli [-h] [-v] [--start-server] [--show-status] [--get-floorsheet] [--output-file FILE] [--to-csv] [--hide-progressbar]
+nepse.setTLSVerification(False)
 
-cmdline interface to nepalstock.com
-
-options:
-  -h, --help          show this help message and exit
-  -v, --version       displays the version info
-  --start-server      starts local server at 0.0.0.0:8000
-  --show-status       dumps Nepse status to the standard output
-  --get-floorsheet    dumps Nepse's floorsheet to the standard output
-  --output-file FILE  sets the output file for dumping the content
-  --to-csv            sets the output format from default[JSON] to CSV
-  --hide-progressbar  sets the visibility of progress base to False
-```
-To Download the entire floorsheet of the day into file `floor.json` in `JSON` format, you can.
-```
-nepse-cli --get-floorsheet --output-file floor.json
-```
-To Download the entire floorsheet of the day into file `floor.csv` in `CSV` format, you can.
-```
-nepse-cli --get-floorsheet --to-csv --output-file floor.csv
-```
-### C. Example
-The example folder contains `/example/NepseServer.py` an implementation of
-this library. The following runs a local flask server on `localhost:8000`.  
-```
-cd example
-python3 NepseServer.py
-``` 
-
-# Uninstallation
-Running the following command will remove the package from the system.
-```
-pip uninstall nepse
+# Get company list
+companies = nepse.getCompanyList()
+print(companies)
 ```
 
-# Development
+## Testing
+
+Run the Jupyter notebook `test_nepse_api.ipynb` to see various API endpoints in action.
+
+## Requirements
+
+- Python 3.11+
+- Flask 3.0.3
+- httpx[http2] 0.27.2
+- pywasm 1.2.2
+- tqdm 4.66.5
+
+## API Endpoints Location
+
+The API configuration can be found in:
+- Base URL: [nepse/NepseLib.py](nepse/NepseLib.py#L44)
+- Endpoint paths: [nepse/data/API_ENDPOINTS.json](nepse/data/API_ENDPOINTS.json)
+- Token URLs: [nepse/TokenUtils.py](nepse/TokenUtils.py#L17-L18)
+
+## Note
+
+This is a test repository for exploring the NEPSE API. SSL certificate verification is disabled due to temporary issues with the NEPSE server.
+
+## Original Library
+
+This code is based on the [NepseUnofficialApi](https://github.com/basic-bgnr/NepseUnofficialApi) library.
+
+## License
+
+For educational and testing purposes only.
+
+---
+
+## Development History
 1. [Dec 13, 2024]
    * PR [#39](https://github.com/basic-bgnr/NepseUnofficialApi/pull/39) ([@surajrimal07](https://github.com/surajrimal07)) merged to master(patch fix for async bug)
 1. [Dec 11, 2024]
