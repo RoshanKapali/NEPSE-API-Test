@@ -2,3 +2,6 @@ Flask==3.0.3
 pywasm==1.2.2
 httpx[http2]==0.27.2
 tqdm==4.66.5
+ipywidgets>=8.0.0
+pandas>=2.0.0
+matplotlib>=3.5.0
